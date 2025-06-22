@@ -1,10 +1,12 @@
 
 
-from .item_updater.brie import AgedBrieUpdater
-from .item_updater.sulfuras import SulfurasUpdater
+from constants import AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS
+
 from .item_updater.backstage import BackstagePassUpdater
+from .item_updater.brie import AgedBrieUpdater
 from .item_updater.conjured import ConjuredItemUpdater
 from .item_updater.normal import NormalItemUpdater
+from .item_updater.sulfuras import SulfurasUpdater
 
 
 class GildedRose:
@@ -23,13 +25,13 @@ class GildedRose:
         """
         Return the appropriate updater instance based on the item name.
         """
-        if item.name == "Aged Brie":
+        if item.name == AGED_BRIE:
             return AgedBrieUpdater(item)
-        elif item.name == "Sulfuras, Hand of Ragnaros":
+        elif item.name == SULFURAS:
             return SulfurasUpdater(item)
-        elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+        elif item.name == BACKSTAGE_PASS:
             return BackstagePassUpdater(item)
-        elif "Conjured" in item.name:
+        elif CONJURED_KEYWORD in item.name:
             return ConjuredItemUpdater(item)
         else:
             return NormalItemUpdater(item)
