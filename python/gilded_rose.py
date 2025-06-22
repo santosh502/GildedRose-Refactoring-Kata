@@ -1,6 +1,6 @@
 
 
-from constants import AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS
+from .constants import AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS
 
 from .item_updater.backstage import BackstagePassUpdater
 from .item_updater.brie import AgedBrieUpdater
