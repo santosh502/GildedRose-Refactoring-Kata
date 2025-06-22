@@ -109,6 +109,11 @@ class GildedRoseTest(unittest.TestCase):
         gr.update_quality()
         self.assertEqual(items[0].quality, 0)
 
+    def test_item_with_quality_already_50_does_not_increase(self):
+        items = [Item(AGED_BRIE, 10, 50)]
+        gr = GildedRose(items)
+        gr.update_quality()
+        self.assertEqual(items[0].quality, 50)
 
 if __name__ == '__main__':
     unittest.main()
