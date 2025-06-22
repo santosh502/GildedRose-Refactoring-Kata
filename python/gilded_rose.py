@@ -1,36 +1,36 @@
-# -*- coding: utf-8 -*-
 
-class GildedRose(object):
 
+from .item_updater.brie import AgedBrieUpdater
+from .item_updater.sulfuras import SulfurasUpdater
+from .item_updater.backstage import BackstagePassUpdater
+from .item_updater.conjured import ConjuredItemUpdater
+from .item_updater.normal import NormalItemUpdater
+
+
+class GildedRose:
+    """
+    The main class that holds the list of items and updates them daily using appropriate strategies.
+    """
     def __init__(self, items):
         self.items = items
 
     def update_quality(self):
+        """Update quality for each item using its corresponding updater."""
         for item in self.items:
-            if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
-                if item.quality > 0:
-                    if item.name != "Sulfuras, Hand of Ragnaros":
-                        item.quality = item.quality - 1
-            else:
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-                    if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                        if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.quality = item.quality + 1
-            if item.name != "Sulfuras, Hand of Ragnaros":
-                item.sell_in = item.sell_in - 1
-            if item.sell_in < 0:
-                if item.name != "Aged Brie":
-                    if item.name != "Backstage passes to a TAFKAL80ETC concert":
-                        if item.quality > 0:
-                            if item.name != "Sulfuras, Hand of Ragnaros":
-                                item.quality = item.quality - 1
-                    else:
-                        item.quality = item.quality - item.quality
-                else:
-                    if item.quality < 50:
-                        item.quality = item.quality + 1
+            self.get_updater(item).update()
+
+    def get_updater(self, item):
+        """
+        Return the appropriate updater instance based on the item name.
+        """
+        if item.name == "Aged Brie":
+            return AgedBrieUpdater(item)
+        elif item.name == "Sulfuras, Hand of Ragnaros":
+            return SulfurasUpdater(item)
+        elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+            return BackstagePassUpdater(item)
+        elif "Conjured" in item.name:
+            return ConjuredItemUpdater(item)
+        else:
+            return NormalItemUpdater(item)
+
