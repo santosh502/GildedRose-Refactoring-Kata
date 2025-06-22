@@ -1,5 +1,6 @@
 from .base import ItemUpdater
 
+
 class NormalItemUpdater(ItemUpdater):
     """Updater for normal items that degrade in quality over time."""
     def update(self):
