@@ -1,7 +1,10 @@
 import unittest
+
+from ..constants import (AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS,
+                         VINTAGE_WINE)
 from ..gilded_rose import GildedRose
 from ..item import Item
-from ..constants import AGED_BRIE, SULFURAS, BACKSTAGE_PASS, CONJURED_KEYWORD
+
 
 class GildedRoseTest(unittest.TestCase):
     """
@@ -114,6 +117,23 @@ class GildedRoseTest(unittest.TestCase):
         gr = GildedRose(items)
         gr.update_quality()
         self.assertEqual(items[0].quality, 50)
+
+    def test_vintage_wine_when_sell_in_reached(self):
+        items = [Item(VINTAGE_WINE, 0, 10)]
+        gr = GildedRose(items)
+        gr.update_quality()
+        self.assertEqual(items[0].quality, 12)
+        gr.update_quality()
+        self.assertEqual(items[0].quality, 14)
+        self.assertEqual(items[0].sell_in, 0)
+
+    def test_vintage_wine_before_sell_in(self):
+        items = [Item(VINTAGE_WINE, 10, 20)]
+        gr = GildedRose(items)
+        gr.update_quality()
+        self.assertEqual(items[0].quality, 20)
+        self.assertEqual(items[0].sell_in, 9)
+        
 
 if __name__ == '__main__':
     unittest.main()

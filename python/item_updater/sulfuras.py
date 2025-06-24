@@ -1,4 +1,4 @@
-from  .base import ItemUpdater
+from .base import ItemUpdater
 
 
 class SulfurasUpdater(ItemUpdater):

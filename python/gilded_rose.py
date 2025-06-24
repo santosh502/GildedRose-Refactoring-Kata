@@ -1,12 +1,13 @@
 
 
-from .constants import AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS
-
+from .constants import (AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS,
+                        VINTAGE_WINE)
 from .item_updater.backstage import BackstagePassUpdater
 from .item_updater.brie import AgedBrieUpdater
 from .item_updater.conjured import ConjuredItemUpdater
 from .item_updater.normal import NormalItemUpdater
 from .item_updater.sulfuras import SulfurasUpdater
+from .item_updater.vintage_wine import VintageWineUpdater
 
 
 class GildedRose:
@@ -33,6 +34,8 @@ class GildedRose:
             return BackstagePassUpdater(item)
         elif CONJURED_KEYWORD in item.name:
             return ConjuredItemUpdater(item)
+        elif item.name == VINTAGE_WINE:
+            return VintageWineUpdater(item)
         else:
             return NormalItemUpdater(item)
 

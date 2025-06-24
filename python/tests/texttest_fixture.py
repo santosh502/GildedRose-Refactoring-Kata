@@ -1,6 +1,6 @@
+from ..constants import AGED_BRIE, BACKSTAGE_PASS, CONJURED_KEYWORD, SULFURAS
 from ..gilded_rose import GildedRose
 from ..item import Item
-from .. constants import AGED_BRIE, SULFURAS, BACKSTAGE_PASS, CONJURED_KEYWORD
 
 if __name__ == "__main__":
     print("OMGHAI!")

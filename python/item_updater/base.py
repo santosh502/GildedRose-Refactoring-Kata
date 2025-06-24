@@ -18,6 +18,6 @@ class ItemUpdater:
         """Decrease item quality by amount (min 0)."""
         self.item.quality = max(0, self.item.quality - amount)
 
-    def decrease_sell_in(self):
+    def decrease_sell_in(self, sell_in=1):
         """Decrease the sell_in value by 1."""
-        self.item.sell_in -= 1
+        self.item.sell_in -= sell_in
